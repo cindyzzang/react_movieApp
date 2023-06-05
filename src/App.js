@@ -5,6 +5,8 @@ import {
 } from "react-router-dom";
 import Home from "./routes/Home";
 import Detail from "./routes/Detail";
+import dateData from "./routes/DateData";
+import DateData from "./routes/DateData";
 
 
 function App() {
@@ -13,8 +15,11 @@ function App() {
       <Route path='/:date/:id'>
         <Detail/>
       </Route>
-      <Route path='/'>
+      <Route path='/:date'>
         <Home/>
+      </Route>
+      <Route path='/'>
+        <DateData/>
       </Route>
     </Switch>
   </Router>
