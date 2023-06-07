@@ -10,7 +10,7 @@ function Movie({id,rank,movieName,date,openDate}) {
     const [poster,setPoster] = useState("")
     useEffect(() => {
         const getPoster = async () => {
-            if (!movieName) return; // movieName 값이 없을 경우 처리
+            //if (!movieName) return; // movieName 값이 없을 경우 처리
 
             const json = await (await fetch(
                 `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=IXI939389P5J03DNHZ78&title=${movieName}&releaseDts=${openDate.replace(/-/g,"")}`
@@ -33,7 +33,7 @@ function Movie({id,rank,movieName,date,openDate}) {
 
     return <div>
         <h3>{rank}위</h3>
-        {urls.length > 0 && <img src={urls[0]} alt={movieName} style={{ width: '200px' }} />}<br/>
+        {urls.length > 0 && <img src={urls[0]} alt={movieName} style={{ width: '200px' }} />} <br/>
         <Link to={process.env.PUBLIC_URL + `/${date}/${id}`}>
             {movieName}
 
