@@ -27,6 +27,7 @@ function Detail() {
             <h1>Loading... </h1>
             :
                 <div>
+
                     <h1>{detail.rank}위</h1>
                     <h3>{detail.movieNm}</h3>
                     <p>개봉일 : {detail.openDt}<br/>

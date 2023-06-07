@@ -15,9 +15,10 @@ function DateData() {
         setDate(pick.replace(/-/g, ''));
     }
     return <div>
+        <h1>일일 박스 오피스 조회</h1>
         <h3>{month}월 {day}일부터 검색 가능합니다</h3>
         <input type={"date"} max={currentDate} onChange={onPick} />
-        <Link to={`/${date}`}><button onClick={onDate} >검색</button></Link>
+        <Link to={process.env.PUBLIC_URL+`/${date}`}><button onClick={onDate} >검색</button></Link>
     </div>
 }
 
