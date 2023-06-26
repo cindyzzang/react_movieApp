@@ -1,0 +1,24 @@
+.container {
+
+}
+.content{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-around;
+}
+.dateBox{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+.movieBox{
+    border: tomato 1px solid;
+    width: 213px;
+    margin: 20px;
+}
+
+.movieBox img{
+    border-radius: 10px;
+}

@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
+import "./Movie.css"
+
 
 function Movie({id,rank,movieName,date,openDate}) {
 
@@ -31,15 +33,13 @@ function Movie({id,rank,movieName,date,openDate}) {
     const urls = poster ? poster.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
 
 
-    return <div>
-        <h3>{rank}위</h3>
-        {urls.length > 0 && <img src={urls[0]} alt={movieName} style={{ width: '200px' }} />} <br/>
-        <Link to={process.env.PUBLIC_URL + `/${date}/${id}`}>
-            {movieName}
-
-        </Link>
-
-    </div>
+    return <div className={"container"}>
+            <h3>{rank}위</h3>
+            {urls.length > 0 && <img src={urls[0]} alt={movieName}  />} <br/>
+                <Link to={process.env.PUBLIC_URL + `/${date}/${id}` }>
+                {movieName}
+                </Link>
+        </div>
 }
 
 Movie.propTypes = {
