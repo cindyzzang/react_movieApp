@@ -8,6 +8,8 @@ function Detail() {
     const [kdbmApi,setKdbmApi] = useState("")
     const {id} = useParams()
     const {date} = useParams()
+        console.log(id)
+    console.log(date)
     function formattedString(str) {return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
     function transformTitle(title) {
         return title.replace(/!HS/g, "").replace(/!HE/g, "").replace(/^\s+|\s+$/g, "").replace(/ +/g, "");
@@ -51,7 +53,8 @@ function Detail() {
 
     const urls = kdbmApi.posters ? kdbmApi.posters.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
 
-    console.log()
+    console.log(date)
+    console.log(id)
     return (
         loading ?
             <h1>Loading... </h1>

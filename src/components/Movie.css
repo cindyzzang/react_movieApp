@@ -11,6 +11,9 @@ h3{
     margin: 0;
     padding: 0;
 }
+img {
+    border-radius: 10px;
+}
 a {
     text-decoration: none;
     color: black;

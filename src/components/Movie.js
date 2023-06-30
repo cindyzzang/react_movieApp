@@ -32,13 +32,12 @@ function Movie({id,rank,movieName,date,openDate}) {
 
     const urls = poster ? poster.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
 
-
     return <div className={"container"}>
+            <Link to={`/detail/${date}/${id}`}>
             <h3>{rank}위</h3>
-            {urls.length > 0 && <img src={urls[0]} alt={movieName}  />} <br/>
-                <Link to={process.env.PUBLIC_URL + `/${date}/${id}` }>
+            {urls.length > 0 && <img src={urls[0]} alt={movieName}  />}
                 {movieName}
-                </Link>
+            </Link>
         </div>
 }
 
