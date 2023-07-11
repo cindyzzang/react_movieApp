@@ -5,10 +5,12 @@ import SetDailyDate from "./routes/SetDailyDate";
 import DailyBoxOffice from "./routes/DailyBoxOffice";
 import WeeklyBoxOffice from "./routes/WeeklyBoxOffice";
 import SetWeeklyDate from "./routes/SetWeeklyDate";
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
   return (
       <Router basename={process.env.PUBLIC_URL}>
+        <GlobalStyles/>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/detail/:date/:id" component={Detail}/>

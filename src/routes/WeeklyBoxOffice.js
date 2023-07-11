@@ -30,6 +30,8 @@ function WeeklyBoxOffice() {
         };
         getMovies()
     },[date]);
+
+
     return <div className={"content"}>
             <div className={"dateBox"}>
                 <Link to='/weekly'><button>뒤로 가기</button></Link>
@@ -46,6 +48,7 @@ function WeeklyBoxOffice() {
                             id={movie.rnum}
                             rank={movie.rank}
                             movieName={movie.movieNm}
+                            audiAcc={movie.audiAcc}
                         />
                     </div>
                 ))

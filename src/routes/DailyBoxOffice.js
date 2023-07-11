@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Movie from "../components/Movie";
 import {useParams,Link} from "react-router-dom";
-import "./DailyBoxOffice.css"
+import "../styles/DailyBoxOffice.css"
 
 function DailyBoxOffice() {
     const [loading, setLoading] = useState(true);
@@ -44,6 +44,7 @@ function DailyBoxOffice() {
                             id={movie.rnum}
                             rank={movie.rank}
                             movieName={movie.movieNm}
+                            audiAcc={movie.audiAcc}
                         />
                     </div>
                 ))

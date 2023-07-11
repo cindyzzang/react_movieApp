@@ -1,0 +1,81 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.movie_poster{
+   margin-bottom: 10px;
+    position: relative;
+}
+.rank_txt{
+    margin: 0 0 -20px 0;
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    color: #fff;
+    font-style: italic;
+    font-size: 32px
+}
+
+h4{
+    padding-left: 5px;
+    margin: 0;
+}
+img {
+    background: gray;
+    border-radius: 10px;
+    width: 204px;
+    height: 298px;
+
+}
+
+.no_image {
+    margin: 0 0 5px 0 ;
+    width: 210px;
+    height: 302px;
+    border-radius: 10px ;
+    border: rgba(0, 0, 0, 0.05) solid 1px;
+    background: #EDEEF0 url("../images/ico_noimage.png") no-repeat 50% 50%;
+    background-size: 44px 44px ;
+}
+.info_txt{
+    padding-left: 5px;
+    font-size: 13px;
+    line-height: 16px;
+    color: #98989C;
+}
+
+.txt_num{
+    padding-left: 5px;
+}
+
+.audi_acc {
+    padding-left: 5px;
+}
+
+.ico_see{
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    left: 160px;
+    background : url("../images/ico_movie.png") no-repeat 0 0;
+    background-size: 500px auto;
+}
+.see_all{
+    background-position: 0 -120px;
+}
+
+.see12{
+    background-position: -40px -120px;
+}
+
+.see15{
+    background-position: -80px -120px;
+
+}
+
+.see_adult{
+    background-position: -120px -120px;
+}

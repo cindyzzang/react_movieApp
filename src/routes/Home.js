@@ -3,7 +3,7 @@ import Movie from "../components/Movie";
 import DailyBoxOffice from "./DailyBoxOffice";
 import {useParams,Link} from "react-router-dom";
 import WeeklyBoxOffice from "./WeeklyBoxOffice";
-import "./Home.css"
+import "../styles/Home.css"
 
 
 function Home() {

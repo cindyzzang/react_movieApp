@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import "./SetDailyDate.css"
+import "../styles/SetDailyDate.css"
 
 
 function SetDailyDate() {
@@ -19,6 +19,7 @@ function SetDailyDate() {
     }
 
     return <div>
+        <Link to={`/`}><button>뒤로가기</button></Link>
         <h1>일일 박스 오피스 조회</h1>
         <Link to={`/weekly`}><button>주간 박스오피스</button></Link>
         <p>{month}월 {day}일부터 검색 가능합니다</p>
