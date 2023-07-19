@@ -30,7 +30,7 @@ function DailyBoxOffice() {
 
     return <div className={"content"}>
             <div className={"dateBox"}>
-                <Link to={`/`}><button>뒤로 가기</button></Link>
+                <Link to={`/daily`}><button>뒤로 가기</button></Link>
                 <h1>{date}</h1>
                 <Link to='/weekly'><button > {"주간 박스오피스"}</button></Link>
             </div>
