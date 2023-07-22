@@ -1,4 +1,5 @@
 import {useState} from "react";
+import PropTypes from "prop-types";
 
 function Login({onLogin}) {
     const [name, setName] = useState("")
@@ -23,6 +24,10 @@ function Login({onLogin}) {
         </div>
 
     )
+}
+
+Login.propTypes = {
+    onLogin : PropTypes.func.isRequired,
 }
 
 export default Login

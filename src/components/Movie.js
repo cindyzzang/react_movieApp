@@ -28,9 +28,10 @@ function Movie({id,rank,movieName,date,openDate,audiAcc}) {
                     setRating(json.Data[0].Result[0].rating);
                 }
             }
+
         };
         getData();
-    }, []);
+    }, [movieName,openDate]);
     const urls = poster ? poster.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
     function formatDate(dateString) {
         const [year, month, day] = dateString.split('-');
