@@ -1,11 +1,12 @@
 import {useEffect, useState} from "react";
-import Movie from "../components/Movie";
+import Movie from "./Movie";
 import {Link} from "react-router-dom";
 import "../styles/BoxOffice.css"
 
+
 function BoxOffice() {
     const [loading, setLoading] = useState(true);
-    const [movies, setMoives] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [range, setRange] = useState("")
     const [choice, setChoice] = useState(true)
 
@@ -16,9 +17,6 @@ function BoxOffice() {
     const searchDate = year + month + date-1
     const currentDayOfWeek = today.getDay(); // 오늘 요일 값(0: 일요일, 1: 월요일, ..., 6: 토요일)
     const daysToSubtract = currentDayOfWeek === 0 ? 7 : currentDayOfWeek; // 저번 주 일요일을 구하기 위해 현재 요일 값에 따라 조정
-    // const lastSundayDate = String(today.getDate() - daysToSubtract).padStart(2, '0');
-    // const lastSundayFormatted = `${year}${month}${lastSundayDate}`;
-    // const searchDate = choice ? searchDailyDate : lastSundayFormatted
     const [dateData, setDateData] = useState(searchDate)
 
 
@@ -127,7 +125,7 @@ function BoxOffice() {
             )).json();
 
                 if (json.boxOfficeResult) {
-                    setMoives(json.boxOfficeResult.dailyBoxOfficeList);
+                    setMovies(json.boxOfficeResult.dailyBoxOfficeList);
                     setLoading(false);
                 }
             } else {
@@ -136,25 +134,25 @@ function BoxOffice() {
                 )).json();
 
                 if (json.boxOfficeResult) {
-                    setMoives(json.boxOfficeResult.weeklyBoxOfficeList);
+                    setMovies(json.boxOfficeResult.weeklyBoxOfficeList);
                     setRange(json.boxOfficeResult.showRange);
                     setLoading(false);
                 }
             }
         }
         getMovies()
-    },[dateData]);
+    },[dateData, choice]);
 
 
 
     return <div className={"content"}>
             <div className={"dateBox"}>
-                <Link to={`/`}><button>뒤로 가기</button></Link>
                 <button onClick={onMinus} className={"ico ico_prev"}>전</button>
                     {choice ? <h1>{dateData}</h1> : <h1>{range}</h1>}
                 <button onClick={onPlus} className={"ico ico_next"}>후</button>
                 <button onClick={onClick}>{choice ? `주간 박스오피스` : `일일 박스오피스`}</button>
                 <input type={"date"} className={"ico_calendar "}/>
+
             </div>
             {loading ?
                 <h1>Loading...</h1> :

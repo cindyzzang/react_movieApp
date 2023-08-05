@@ -16,10 +16,14 @@ function Login({onLogin}) {
         }
     }
 
-
+    function onEnterDown(e) {
+        if (e.key === 'Enter') {
+            (name == "") ? alert("닉네임을 입력하세요") : onLogin(name)
+        }
+    }
     return (
         <div>
-            <input onChange={onChange} placeholder={"닉네임을 입력하세요"}/>
+            <input onChange={onChange} onKeyDown={onEnterDown} placeholder={"닉네임을 입력하세요"}/>
             <button onClick={onClick}>로그인</button>
         </div>
 

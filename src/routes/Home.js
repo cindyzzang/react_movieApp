@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import "../styles/Home.css"
 import Login from "../components/Login";
 import {Link} from "react-router-dom";
+import BoxOffice from "../components/BoxOffice";
 
 
 function Home() {
@@ -19,18 +20,25 @@ function Home() {
     }
 
     return <div>
-        <h1>{nickname} movie archive</h1>
-        {loggedIn ? (
-            <div>
-                <Link to={"/boxoffice"}>boxoffice</Link>
-                <Link to={"#"}>검색</Link>
+            <div  className={"header"}>
+                <h1>{nickname} movie archive</h1>
                 <div>
-                    <button onClick={handleLogout}>Logout</button>
+                    <form>
+                        <input type={"search"}/>
+                        <button>검색</button>
+                    </form>
+                {loggedIn ? (
+                    <div>
+                        <button onClick={handleLogout}>Logout</button>
+                    </div>
+                ) : (
+                    <Login onLogin={handleLogin} />
+                )}
                 </div>
             </div>
-        ) : (
-            <Login onLogin={handleLogin} />
-        )}
+            <div>
+                {loggedIn? <BoxOffice/> : <p></p>}
+            </div>
         </div>
     }
 

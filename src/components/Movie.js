@@ -1,7 +1,7 @@
 import PropTypes, {number} from "prop-types";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
-import "../styles/Movie.css"
+import styles from "../styles/Movie.module.css"
 
 
 function Movie({id,rank,movieName,date,openDate,audiAcc}) {
@@ -40,29 +40,29 @@ function Movie({id,rank,movieName,date,openDate,audiAcc}) {
     }
 
 
-    return <div className={"container"}>
+    return <div className={styles.container}>
             <Link to={`/detail/${date}/${id}`}>
-                <div className={"movie_poster"}>
-                <span className={"rank_txt"}>{rank}</span>
+                <div className={styles.movie_poster}>
+                <span className={styles.rank_txt}>{rank}</span>
                 {rating == "전체관람가" ?
-                        <span className={"ico_see see_all"}></span> :
+                        <span className={`${styles.ico_see} ${styles.see_all}`}></span> :
                         rating == "12세관람가" ?
-                            <span className={"ico_see see12"}></span> :
+                            <span className={`${styles.ico_see} ${styles.see12}`}></span> :
                             rating == "15세관람가" ?
-                                <span className={"ico_see see15"}></span> :
+                                <span className={`${styles.ico_see} ${styles.see15}`}></span> :
                                 rating == "18세관람가(청소년관람불가)" ?
-                                <span className={"ico_see see_adult"}></span> : <></>
+                                <span className={`${styles.ico_see} ${styles.see_adult}`}></span> : <></>
                 }
-                {urls.length > 0 ? <img src={urls[0]} alt={movieName}/> : <div className={"no_image"}></div> }
+                {urls.length > 0 ? <img src={urls[0]} alt={movieName}/> : <div className={styles.no_image}></div> }
                 </div>
-                <div className={"movie_info"}>
+                <div className={styles.movie_info}>
                 <h4>{movieName}</h4>
-                <span className={"info_txt"}>
+                <span className={styles.info_txt}>
                     개봉
-                    <span className={"txt_num"}>
+                    <span className={styles.txt_num}>
                         {formatDate(openDate)}
                     </span>
-                    <span className={"audi_acc"}>
+                    <span className={styles.audi_acc}>
                         {audiAcc.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}명
                     </span>
                 </span>

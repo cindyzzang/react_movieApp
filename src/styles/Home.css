@@ -1,6 +1,10 @@
-.container {
-
+.header {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    justify-content: space-around;
 }
+
 .content{
     display: flex;
     flex-flow: wrap;
@@ -9,6 +13,6 @@
 .dateBox{
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
