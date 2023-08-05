@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import "../styles/Home.css"
 import Login from "../components/Login";
+import {Link} from "react-router-dom";
 
 
 function Home() {
@@ -21,12 +22,8 @@ function Home() {
         <h1>{nickname} movie archive</h1>
         {loggedIn ? (
             <div>
-                <button>boxoffice</button>
-                <button>review</button>
-                <button>추가하기</button>
-                <ul>
-                    <li>영화영화포스터포스터</li>
-                </ul>
+                <Link to={"/boxoffice"}>boxoffice</Link>
+                <Link to={"#"}>검색</Link>
                 <div>
                     <button onClick={handleLogout}>Logout</button>
                 </div>

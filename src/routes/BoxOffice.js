@@ -11,34 +11,119 @@ function BoxOffice() {
 
     const today = new Date();
     const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const searchDailydate = year + month + String(today.getDate()-1).padStart(2, '0');
+    const month = ("0" + (today.getMonth() + 1)).slice(-2);
+    const date = ("0" + (today.getDate())).slice(-2);
+    const searchDate = year + month + date-1
     const currentDayOfWeek = today.getDay(); // 오늘 요일 값(0: 일요일, 1: 월요일, ..., 6: 토요일)
     const daysToSubtract = currentDayOfWeek === 0 ? 7 : currentDayOfWeek; // 저번 주 일요일을 구하기 위해 현재 요일 값에 따라 조정
-    const lastSundayDate = String(today.getDate()- daysToSubtract).padStart(2, '0');
-    const lastSundayFormatted = `${year}${month}${lastSundayDate}`;
-    const searchDate = choice ? searchDailydate : lastSundayFormatted
-    const [DateData, setDateData] = useState(searchDate)
+    // const lastSundayDate = String(today.getDate() - daysToSubtract).padStart(2, '0');
+    // const lastSundayFormatted = `${year}${month}${lastSundayDate}`;
+    // const searchDate = choice ? searchDailyDate : lastSundayFormatted
+    const [dateData, setDateData] = useState(searchDate)
+
+
     function onClick() {
         setChoice(!choice)
+        if (!choice) {
+            today.setDate(today.getDate() - 1 ); //
+        } else {
+            today.setDate(today.getDate() - daysToSubtract); //
+        }
+        // 날짜를 변경한 후에 새로운 날짜를 읽습니다.
+        const year = today.getFullYear();
+        const month = ("0" + (today.getMonth() + 1)).slice(-2);
+        const date = ("0" + today.getDate()).slice(-2);
+        setDateData(year + month + date);
     }
 
-    // function onPlus() {
-    //     setDateData((prevDate) =>
-    //         choice ? String(Number(prevDate) + 1) : (lastSundayFormatted <= prevDate ? prevDate : String(Number(prevDate) + 7))
-    //     );
-    // }
-    //
-    // function onMinus() {
-    //     return choice ? Number(searchDate-1) :
-    //         (lastSundayFormatted <= searchDate) ? searchDate : Number(searchDate-7)
-    // }
+
+    function onPlus() {
+        setDateData((prevDate) => {
+            if(!choice){
+                const prevDateString = String(prevDate);
+
+                const prevDateObject = new Date(
+                    prevDateString.slice(0, 4),
+                    prevDateString.slice(4, 6) - 1,  // month는 0부터 시작하므로 1을 빼줍니다.
+                    prevDateString.slice(6, 8)
+                );
+
+                const nextDateObject = new Date(prevDateObject.getTime());
+                nextDateObject.setDate(nextDateObject.getDate() + 7);  // 일주일을 증가시킵니다.
+
+                const today = new Date();
+                if (nextDateObject > today) {
+                    alert("The date cannot be in the future!");
+                    return prevDate;
+                } else {
+                    const year = nextDateObject.getFullYear();
+                    const month = ("0" + (nextDateObject.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+                    const date = ("0" + nextDateObject.getDate()).slice(-2);
+
+                    return year + month + date;  }// "YYYYMMDD" 형식의 문자열을 반환합니다
+            } else {
+                const prevDateString = String(prevDate);
+
+                const prevDateObject = new Date(
+                    prevDateString.slice(0, 4),
+                    prevDateString.slice(4, 6) - 1,  // month는 0부터 시작하므로 1을 빼줍니다.
+                    prevDateString.slice(6, 8)
+                );
+
+                prevDateObject.setDate(prevDateObject.getDate() + 1);  // 하루를 증가시킵니다.
+
+                const year = prevDateObject.getFullYear();
+                const month = ("0" + (prevDateObject.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+                const date = ("0" + prevDateObject.getDate()).slice(-2);
+
+                return year + month + date;  // "YYYYMMDD" 형식의 문자열을 반환합니다
+            }
+        });
+    }
+    function onMinus() {
+      setDateData((prevDate) => {
+          if(!choice){
+              const prevDateString = String(prevDate);
+
+              const prevDateObject = new Date(
+                  prevDateString.slice(0, 4),
+                  prevDateString.slice(4, 6) - 1,  // month는 0부터 시작하므로 1을 빼줍니다.
+                  prevDateString.slice(6, 8)
+              );
+
+              prevDateObject.setDate(prevDateObject.getDate() - 7);  // 하루를 감소시킵니다.
+
+              const year = prevDateObject.getFullYear();
+              const month = ("0" + (prevDateObject.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+              const date = ("0" + prevDateObject.getDate()).slice(-2);
+
+              return year + month + date;  // "YYYYMMDD" 형식의 문자열을 반환합니다
+          }else {
+              const prevDateString = String(prevDate);
+
+              const prevDateObject = new Date(
+                  prevDateString.slice(0, 4),
+                  prevDateString.slice(4, 6) - 1,  // month는 0부터 시작하므로 1을 빼줍니다.
+                  prevDateString.slice(6, 8)
+              );
+
+              prevDateObject.setDate(prevDateObject.getDate() - 1);  // 하루를 감소시킵니다.
+
+              const year = prevDateObject.getFullYear();
+              const month = ("0" + (prevDateObject.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+              const date = ("0" + prevDateObject.getDate()).slice(-2);
+
+              return year + month + date;  // "YYYYMMDD" 형식의 문자열을 반환합니다
+          }
+      });
+    }
+
 
     useEffect(() => {
         const getMovies = async() => {
             if (choice) {
                 const json = await (await fetch(
-                `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=de7816a233ab3abe2ec92149df1f5974&targetDt=${searchDate}`
+                `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=de7816a233ab3abe2ec92149df1f5974&targetDt=${dateData}`
             )).json();
 
                 if (json.boxOfficeResult) {
@@ -47,7 +132,7 @@ function BoxOffice() {
                 }
             } else {
                 const json = await (await fetch(
-                    `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?weekGb=0&key=de7816a233ab3abe2ec92149df1f5974&targetDt=${searchDate}`
+                    `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?weekGb=0&key=de7816a233ab3abe2ec92149df1f5974&targetDt=${dateData}`
                 )).json();
 
                 if (json.boxOfficeResult) {
@@ -58,15 +143,16 @@ function BoxOffice() {
             }
         }
         getMovies()
-    },[searchDate]);
+    },[dateData]);
+
+
 
     return <div className={"content"}>
             <div className={"dateBox"}>
-                <Link to={`/daily`}><button>뒤로 가기</button></Link>
-
+                <Link to={`/`}><button>뒤로 가기</button></Link>
                 <button onClick={onMinus} className={"ico ico_prev"}>전</button>
-                    {choice ? <h1>{searchDate}</h1> : <h1>{range}</h1>}
-                <button  className={"ico ico_next"}>후</button>
+                    {choice ? <h1>{dateData}</h1> : <h1>{range}</h1>}
+                <button onClick={onPlus} className={"ico ico_next"}>후</button>
                 <button onClick={onClick}>{choice ? `주간 박스오피스` : `일일 박스오피스`}</button>
                 <input type={"date"} className={"ico_calendar "}/>
             </div>

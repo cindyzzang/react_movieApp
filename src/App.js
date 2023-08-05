@@ -14,6 +14,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/boxoffice" component={BoxOffice} />
           <Route path="/boxoffice/detail/:id" component={Detail}/>
+
         </Switch>
       </Router>
   );
