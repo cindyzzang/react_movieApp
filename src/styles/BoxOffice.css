@@ -1,7 +1,32 @@
+.content{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+    width: 90%;
+    margin : auto;
+    padding-top: 80px;
+}
 
-.movieBox{
+.content_header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+
+.content_header h2{
+    font-size: 24px;
+    line-height: 28px;
+}
+.date_box{
+    display: flex;
+    justify-content: space-around;
+    width: 35%;
+}
+
+.movie_box{
     width: 213px;
-    margin: 20px;
+    margin: 10px;
 }
 
 .ico {
@@ -22,10 +47,23 @@
 .ico_next {
     background-position: -160px 0;
 }
-
-.ico_calendar {
-    width: 20px;
-    height: 20px;
-    text-indent: -9999px;
-    margin-top:25px;
+.change_range{
+    display: flex;
+    width: 15%;
+    justify-content: space-around;
 }
+.change_range button {
+    background: none;
+    border: none;
+    height: 50%;
+    margin: auto 0 ;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 20px;
+    cursor: pointer;
+}
+
+.change_range button:hover{
+    text-decoration: underline;
+}
+

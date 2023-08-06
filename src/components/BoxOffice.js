@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Movie from "./Movie";
-import {Link} from "react-router-dom";
 import "../styles/BoxOffice.css"
 
 
@@ -146,18 +145,22 @@ function BoxOffice() {
 
 
     return <div className={"content"}>
-            <div className={"dateBox"}>
-                <button onClick={onMinus} className={"ico ico_prev"}>전</button>
+            <div className={"content_header"}>
+                <h2>박스오피스</h2>
+                <div className={"date_box"} >
+                    <button onClick={onMinus} className={"ico ico_prev"}>전</button>
                     {choice ? <h1>{dateData}</h1> : <h1>{range}</h1>}
-                <button onClick={onPlus} className={"ico ico_next"}>후</button>
-                <button onClick={onClick}>{choice ? `주간 박스오피스` : `일일 박스오피스`}</button>
-                <input type={"date"} className={"ico_calendar "}/>
-
+                    <button onClick={onPlus} className={"ico ico_next"}>후</button>
+                </div>
+                <div className={"change_range"}>
+                    <button onClick={onClick}>{choice ? `주간` : `일일`}</button>
+                </div>
             </div>
+
             {loading ?
                 <h1>Loading...</h1> :
                 movies.map((movie) => (
-                    <div className={"movieBox"} key={movie.rnum}>
+                    <div className={"movie_box"} key={movie.rnum}>
                         <Movie
                             date={searchDate}
                             openDate={movie.openDt}

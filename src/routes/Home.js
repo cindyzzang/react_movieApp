@@ -19,24 +19,24 @@ function Home() {
         setLoggedIn(false);
     }
 
-    return <div>
+    return <div className={"container"}>
             <div  className={"header"}>
                 <h1>{nickname} movie archive</h1>
-                <div>
-                    <form>
-                        <input type={"search"}/>
-                        <button>검색</button>
-                    </form>
                 {loggedIn ? (
-                    <div>
+                    <div className={"setting"}>
+                        <form>
+                            <input type={"search"} placeholder={"영화 검색"}/>
+                            <button>검색</button>
+                        </form>
                         <button onClick={handleLogout}>Logout</button>
                     </div>
                 ) : (
-                    <Login onLogin={handleLogin} />
+                    <div className={"setting"}>
+                        <Login onLogin={handleLogin} />
+                    </div>
                 )}
-                </div>
             </div>
-            <div>
+            <div className={"content_box"}>
                 {loggedIn? <BoxOffice/> : <p></p>}
             </div>
         </div>

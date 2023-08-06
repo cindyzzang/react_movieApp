@@ -41,7 +41,7 @@ function Movie({id,rank,movieName,date,openDate,audiAcc}) {
 
 
     return <div className={styles.container}>
-            <Link to={`/detail/${date}/${id}`}>
+            <Link to={`${date}/${id}`}>
                 <div className={styles.movie_poster}>
                 <span className={styles.rank_txt}>{rank}</span>
                 {rating == "전체관람가" ?

@@ -12,8 +12,7 @@ function App() {
         <GlobalStyles/>
         <Switch>
           <Route path="/" exact component={Home}/>
-          <Route path="/detail/:id" component={Detail}/>
-
+          <Route path="/:date/:id" component={Detail}/>
         </Switch>
       </Router>
   );
