@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
+import {fetchDailyBoxOffice, fetchWeeklyBoxOffice} from "../utils/Api";
 import Movie from "./Movie";
+import SetDate from "./SetDate";
 import "../styles/BoxOffice.css"
 
 
@@ -17,6 +19,10 @@ function BoxOffice() {
     const currentDayOfWeek = today.getDay(); // 오늘 요일 값(0: 일요일, 1: 월요일, ..., 6: 토요일)
     const daysToSubtract = currentDayOfWeek === 0 ? 7 : currentDayOfWeek; // 저번 주 일요일을 구하기 위해 현재 요일 값에 따라 조정
     const [dateData, setDateData] = useState(searchDate)
+
+    function handleDateChange(newDate) {
+        setDateData(newDate.replace(/-/g, ''));
+    }
 
 
     function onClick() {
@@ -69,11 +75,19 @@ function BoxOffice() {
 
                 prevDateObject.setDate(prevDateObject.getDate() + 1);  // 하루를 증가시킵니다.
 
-                const year = prevDateObject.getFullYear();
-                const month = ("0" + (prevDateObject.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
-                const date = ("0" + prevDateObject.getDate()).slice(-2);
+                const today = new Date();
+                if (prevDateObject => today) {
+                    alert("The date cannot be in the future!");
+                    return prevDate;
+                } else {
+                    const year = prevDateObject.getFullYear();
+                    const month = ("0" + (prevDateObject.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더해줍니다.
+                    const date = ("0" + prevDateObject.getDate()).slice(-2);
 
-                return year + month + date;  // "YYYYMMDD" 형식의 문자열을 반환합니다
+                    return year + month + date;  // "YYYYMMDD" 형식의 문자열을 반환합니다
+                }
+
+
             }
         });
     }
@@ -117,32 +131,19 @@ function BoxOffice() {
 
 
     useEffect(() => {
-        const getMovies = async() => {
+        async function getMovies() {
             if (choice) {
-                const json = await (await fetch(
-                `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=de7816a233ab3abe2ec92149df1f5974&targetDt=${dateData}`
-            )).json();
-
-                if (json.boxOfficeResult) {
-                    setMovies(json.boxOfficeResult.dailyBoxOfficeList);
-                    setLoading(false);
-                }
+                const dailyBoxOfficeList = await fetchDailyBoxOffice(dateData);
+                setMovies(dailyBoxOfficeList);
             } else {
-                const json = await (await fetch(
-                    `https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?weekGb=0&key=de7816a233ab3abe2ec92149df1f5974&targetDt=${dateData}`
-                )).json();
-
-                if (json.boxOfficeResult) {
-                    setMovies(json.boxOfficeResult.weeklyBoxOfficeList);
-                    setRange(json.boxOfficeResult.showRange);
-                    setLoading(false);
-                }
+                const { movies, range } = await fetchWeeklyBoxOffice(dateData);
+                setMovies(movies);
+                setRange(range);
             }
+            setLoading(false);
         }
-        getMovies()
-    },[dateData, choice]);
-
-
+        getMovies();
+    }, [dateData, choice]);
 
     return <div className={"content"}>
             <div className={"content_header"}>
@@ -154,7 +155,9 @@ function BoxOffice() {
                 </div>
                 <div className={"change_range"}>
                     <button onClick={onClick}>{choice ? `주간` : `일일`}</button>
+                    <SetDate onPickChange={handleDateChange}/>
                 </div>
+
             </div>
 
             {loading ?

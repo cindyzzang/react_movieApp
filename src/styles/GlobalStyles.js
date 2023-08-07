@@ -14,6 +14,10 @@ const GlobalStyles = createGlobalStyle`
     border: none;
     cursor: pointer;
   }
+  input{
+    background: none;
+    border: none;
+  }
 `;
 
 export default GlobalStyles;

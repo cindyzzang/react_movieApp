@@ -40,7 +40,7 @@ function Movie({id,rank,movieName,date,openDate,audiAcc}) {
     }
 
 
-    return <div className={styles.container}>
+    return <div className={styles.movie_wrap}>
             <Link to={`${date}/${id}`}>
                 <div className={styles.movie_poster}>
                 <span className={styles.rank_txt}>{rank}</span>
