@@ -1,6 +1,8 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-//import movie from "../components/Movie";
+import React from "react";
+
+import "../styles/Detail.css"
 
 function Detail() {
     const [loading, setLoding] = useState(true);
@@ -8,15 +10,13 @@ function Detail() {
     const [kdbmApi,setKdbmApi] = useState("")
     const {id} = useParams()
     const {date} = useParams()
+
+
     function formattedString(str) {return str.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
     function transformTitle(title) {
         return title.replace(/!HS/g, "").replace(/!HE/g, "").replace(/^\s+|\s+$/g, "").replace(/ +/g, "");
     }
-    function formattedDate(str) {
-        const year = str.slice(0, 4);
-        const month = str.slice(4, 6);
-        const day = str.slice(6, 8);
-        return `${year}년 ${month}월 ${day}일`;}
+
     const getMovie = async () => {
         const json = await(
             await fetch(`https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=de7816a233ab3abe2ec92149df1f5974&targetDt=${date}`)
@@ -49,25 +49,117 @@ function Detail() {
         getKdbmApi()
     },[detail])
 
-    const urls = kdbmApi.posters ? kdbmApi.posters.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
 
+    function splitSentences(text) {
+        text = text.split("...").join("-")
+        text = text.split("!").join("!\n")
+        text = text.split(".").join(".\n")
+        return text.split("-").join("...\n")
+    }
+    console.log(detail)
+    const urls = kdbmApi.posters ? kdbmApi.posters.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
     return (
         loading ?
             <h1>Loading... </h1>
             :
-                <div>
-                    <h1>{detail.rank}위</h1>
-                    <img src={urls[0]} alt={detail.movieNm}/>
-                    <h3>{detail.movieNm}</h3>
-                    <p> 장르 : {kdbmApi.genre}<br/>
-                        줄거리 : {kdbmApi.plots.plot[0].plotText} <br/>
-                        출연 : {kdbmApi.actors.actor.map((actor)=>`${actor.actorNm}, `)}<br/>
-                        개봉일 : {detail.openDt}<br/>
-                        누적관객수 : {formattedString(detail.audiAcc)}명<br/>
-                        {formattedDate(date)} 관객수 : {formattedString(detail.audiCnt)}명 <br/>
-                        <li>{kdbmApi.stlls.split("|").map((image, idx) => <img src={image} key={idx} alt="" />)}</li>
+                <div className={"detail_wrap"}>
+                    <div className={"detail_basic"}>
+                        <img src={urls[0]} alt={detail.movieNm}/>
+                        <div>
+                            <div className={"detail_title"}>
+                                <h1>{detail.movieNm}</h1>
+                                <p>{kdbmApi.titleEng}, {kdbmApi.prodYear}</p>
+                            </div>
+                            <div className={"detail_cont"}>
+                                <div className={"detail_info"}>
+                                    <dl>
+                                        <dt>
+                                            개봉
+                                        </dt>
+                                        <dd>
+                                            {detail.openDt.split('-').join('.')}
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>
+                                            장르
+                                        </dt>
+                                        <dd>
+                                            {kdbmApi.genre}
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>
+                                            국가
+                                        </dt>
+                                        <dd>
+                                            {kdbmApi.nation}
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>
+                                            등급
+                                        </dt>
+                                        <dd>
+                                            {kdbmApi.rating}
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div className={"detail_info"}>
+                                    <dl>
+                                        <dt>
+                                            러닝타임
+                                        </dt>
+                                        <dd>
+                                            {kdbmApi.runtime}분
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>
+                                            누적관객
+                                        </dt>
+                                        <dd>
+                                            {formattedString(detail.audiAcc)}명
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>
+                                            박스오피스
+                                        </dt>
+                                        <dd>
+                                            {detail.rnum}위
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
 
-                    </p>
+                        </div>
+
+                    </div>
+                    <nav>
+                        <a href={"#summary"}>주요정보</a>
+                        <a href={"#crew"}>출연/제작</a>
+                        <a href={"#photo"}>영상/포토</a>
+                    </nav>
+                    <div >
+                        <div className={"movie_summary"} id={"summary"}>
+                            {splitSentences(kdbmApi.plots.plot[0].plotText)}
+                        </div>
+
+                        <div className={"movie_crew"} id={"crew"}>
+                            <h2>출연진</h2>
+                            {kdbmApi.actors.actor.map((actor, index) => <span key={index}>{actor.actorNm}</span>)}
+                        </div>
+                        <div className={"detail_media"} id={"photo"}>
+                            <h2>포토</h2>
+                            <ul className={"detail_video"}>
+
+                            </ul>
+                            <ul className={"detail_photo"}>
+                                <li>{kdbmApi.stlls.split("|").map((image, idx) => <img src={image} key={idx} alt="" />)}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
     )

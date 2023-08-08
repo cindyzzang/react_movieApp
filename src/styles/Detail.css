@@ -1,0 +1,25 @@
+.detail_wrap{
+    width: 90%;
+    margin : auto;
+    padding-top: 80px;
+}
+
+.detail_basic{
+    display: flex;
+}
+
+.detail_cont {
+    display: flex;
+}
+
+.movie_summary {
+    width: 50%;
+    line-height: 26px;
+    font-size: 16px;
+    white-space: pre-wrap;
+    word-break: keep-all;
+}
+
+.movie_crew span{
+    margin-right: 10px;
+}

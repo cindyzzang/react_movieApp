@@ -1,6 +1,7 @@
 import PropTypes, {number} from "prop-types";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {getMovieData} from "../utils/Api";
 import styles from "../styles/Movie.module.css"
 
 
@@ -15,9 +16,7 @@ function Movie({id,rank,movieName,date,openDate,audiAcc}) {
         const getData = async () => {
             //if (!movieName) return; // movieName 값이 없을 경우 처리
 
-            const json = await (await fetch(
-                `https://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=IXI939389P5J03DNHZ78&title=${movieName}&releaseDts=${openDate.replace(/-/g,"")}`
-            )).json();
+            const json = await getMovieData(movieName, openDate);
 
             if (json.Data && json.Data[0] && json.Data[0].Result && json.Data[0].Result[0] ) {
                 const movieTitle = transformTitle(movieName);
@@ -28,10 +27,9 @@ function Movie({id,rank,movieName,date,openDate,audiAcc}) {
                     setRating(json.Data[0].Result[0].rating);
                 }
             }
-
         };
         getData();
-    }, [movieName,openDate]);
+    }, [movieName, openDate]);
     const urls = poster ? poster.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
     function formatDate(dateString) {
         const [year, month, day] = dateString.split('-');

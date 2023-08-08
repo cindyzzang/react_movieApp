@@ -17,20 +17,14 @@ function Header() {
     }
 
     return <div  className={"header"}>
-        <Link to={"/"}><h1>{nickname} movie archive</h1></Link>
+        <Link to={"/"}><h1>{nickname} movie app</h1></Link>
+        <div className={"setting"}>
         {loggedIn ? (
-            <div className={"setting"}>
-                <form>
-                    <input type={"search"} placeholder={"영화 검색"}/>
-                    <button>검색</button>
-                </form>
                 <button onClick={handleLogout}>Logout</button>
-            </div>
         ) : (
-            <div className={"setting"}>
                 <Login onLogin={handleLogin} />
-            </div>
         )}
+        </div>
     </div>
 }
 
