@@ -1,7 +1,7 @@
 import Login from "./Login";
 import {useState} from "react";
 import {Link} from "react-router-dom";
-
+import "../styles/Header.css"
 function Header() {
     const [loggedIn, setLoggedIn] = useState(false);
     const [nickname, setNickname] = useState("");

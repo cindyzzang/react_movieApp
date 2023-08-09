@@ -146,7 +146,7 @@ function Detail() {
                     <div className={"detail_content"} >
                         <div className={"movie_summary"} id={"summary"}>
                             <h2>주요정보</h2>
-                            {splitSentences(kdbmApi.plots.plot[0].plotText)}
+                            <p>{splitSentences(kdbmApi.plots.plot[0].plotText)}</p>
                         </div>
                         <div className={"movie_crew"} id={"crew"}>
                             <h2>출연진</h2>
@@ -158,8 +158,6 @@ function Detail() {
                                 <dt>출연</dt>
                                 <dl>{kdbmApi.actors.actor.map((actor, index) => <span key={index}>{actor.actorNm}</span>)}</dl>
                             </dl>
-
-
                         </div>
                         <div className={"movie_media"} id={"photo"}>
                             <h2>포토</h2>

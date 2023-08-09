@@ -145,7 +145,7 @@ function BoxOffice() {
         getMovies();
     }, [dateData, choice]);
 
-    return <div className={"content"}>
+    return <div className={"box_office_wrap"}>
             <div className={"content_header"}>
                 <h2>박스오피스</h2>
                 <div className={"date_box"} >

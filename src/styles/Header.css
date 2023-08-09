@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    flex-flow: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.setting {
+    display: flex;
+    margin-top: 30px;
+}
+.setting form button{
+    background-image: url("../images/ico_movie.png") ;
+    width: 20px;
+    height: 20px;
+    background-size: 500px auto;
+    background-position: -400px 0;
+    text-indent: -9999px;
+}
+.setting button{
+    margin-left: 10px;
+}
+/*    로그아웃 버튼*/
+.setting > button{
+    height: 50%;
+
+}

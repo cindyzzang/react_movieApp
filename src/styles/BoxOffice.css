@@ -1,4 +1,4 @@
-.content{
+.box_office_wrap{
     display: flex;
     flex-flow: wrap;
     justify-content: space-evenly;
@@ -53,7 +53,6 @@
     display: flex;
     position: relative;
     width: 20%;
-
 }
 .change_range button {
     background: none;
@@ -64,7 +63,6 @@
     font-weight: bold;
     line-height: 20px;
     cursor: pointer;
-
 }
 .change_range input{
     position: absolute;
@@ -72,9 +70,8 @@
     height: 50%;
     left: 10rem;
     top: 1.25rem;
-    opacity: 1;
-    cursor: pointer;
     opacity: 0;
+    cursor: pointer;
 }
 
 .change_range input::-webkit-calendar-picker-indicator{

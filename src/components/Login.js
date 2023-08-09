@@ -8,7 +8,7 @@ function Login({onLogin}) {
         setName(e.target.value)
     }
     function onClick(e) {
-        if (name == "") {
+        if (name === "") {
             e.preventDefault()
             alert("닉네임을 입력하세요")
         } else {
@@ -18,7 +18,7 @@ function Login({onLogin}) {
 
     function onEnterDown(e) {
         if (e.key === 'Enter') {
-            (name == "") ? alert("닉네임을 입력하세요") : onLogin(name)
+            (name === "") ? alert("닉네임을 입력하세요") : onLogin(name)
         }
     }
     return (
