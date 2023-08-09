@@ -51,12 +51,14 @@ function Detail() {
 
 
     function splitSentences(text) {
+        text = text.split("...!").join("~")
         text = text.split("...").join("-")
         text = text.split("!").join("!\n")
         text = text.split(".").join(".\n")
+        text = text.split("~").join("...!\n")
         return text.split("-").join("...\n")
     }
-    console.log(detail)
+    console.log(kdbmApi)
     const urls = kdbmApi.posters ? kdbmApi.posters.split("|") : []; //poster가 존재할 경우에만 split 메서드 사용
     return (
         loading ?
@@ -65,14 +67,14 @@ function Detail() {
                 <div className={"detail_wrap"}>
                     <div className={"detail_basic"}>
                         <img src={urls[0]} alt={detail.movieNm}/>
-                        <div>
+                        <div className={"detail_inner"}>
                             <div className={"detail_title"}>
                                 <h1>{detail.movieNm}</h1>
-                                <p>{kdbmApi.titleEng}, {kdbmApi.prodYear}</p>
+                                <span>{kdbmApi.titleEng.split(" (")[0]}, {kdbmApi.prodYear}</span>
                             </div>
                             <div className={"detail_cont"}>
                                 <div className={"detail_info"}>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             개봉
                                         </dt>
@@ -80,7 +82,7 @@ function Detail() {
                                             {detail.openDt.split('-').join('.')}
                                         </dd>
                                     </dl>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             장르
                                         </dt>
@@ -88,7 +90,7 @@ function Detail() {
                                             {kdbmApi.genre}
                                         </dd>
                                     </dl>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             국가
                                         </dt>
@@ -96,7 +98,7 @@ function Detail() {
                                             {kdbmApi.nation}
                                         </dd>
                                     </dl>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             등급
                                         </dt>
@@ -106,7 +108,7 @@ function Detail() {
                                     </dl>
                                 </div>
                                 <div className={"detail_info"}>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             러닝타임
                                         </dt>
@@ -114,7 +116,7 @@ function Detail() {
                                             {kdbmApi.runtime}분
                                         </dd>
                                     </dl>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             누적관객
                                         </dt>
@@ -122,7 +124,7 @@ function Detail() {
                                             {formattedString(detail.audiAcc)}명
                                         </dd>
                                     </dl>
-                                    <dl>
+                                    <dl className={"list_info"}>
                                         <dt>
                                             박스오피스
                                         </dt>
@@ -139,22 +141,28 @@ function Detail() {
                     <nav>
                         <a href={"#summary"}>주요정보</a>
                         <a href={"#crew"}>출연/제작</a>
-                        <a href={"#photo"}>영상/포토</a>
+                        <a href={"#photo"}>포토</a>
                     </nav>
-                    <div >
+                    <div className={"detail_content"} >
                         <div className={"movie_summary"} id={"summary"}>
+                            <h2>주요정보</h2>
                             {splitSentences(kdbmApi.plots.plot[0].plotText)}
                         </div>
-
                         <div className={"movie_crew"} id={"crew"}>
                             <h2>출연진</h2>
-                            {kdbmApi.actors.actor.map((actor, index) => <span key={index}>{actor.actorNm}</span>)}
-                        </div>
-                        <div className={"detail_media"} id={"photo"}>
-                            <h2>포토</h2>
-                            <ul className={"detail_video"}>
+                            <dl>
+                                <dt>감독</dt>
+                                <dl>{kdbmApi.directors.director[0].directorNm}</dl>
+                            </dl>
+                            <dl>
+                                <dt>출연</dt>
+                                <dl>{kdbmApi.actors.actor.map((actor, index) => <span key={index}>{actor.actorNm}</span>)}</dl>
+                            </dl>
 
-                            </ul>
+
+                        </div>
+                        <div className={"movie_media"} id={"photo"}>
+                            <h2>포토</h2>
                             <ul className={"detail_photo"}>
                                 <li>{kdbmApi.stlls.split("|").map((image, idx) => <img src={image} key={idx} alt="" />)}</li>
                             </ul>

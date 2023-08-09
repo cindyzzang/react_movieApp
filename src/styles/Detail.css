@@ -1,17 +1,81 @@
 .detail_wrap{
-    width: 90%;
+    width: 80%;
     margin : auto;
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 .detail_basic{
     display: flex;
 }
 
-.detail_cont {
-    display: flex;
+.detail_basic img {
+    margin: 20px;
+}
+.detail_inner {
+    margin-left: 20px;
 }
 
+.detail_title h1{
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 10px;
+}
+
+.detail_cont {
+    display: flex;
+    align-items: flex-start;
+}
+.detail_info {
+    margin-top: 20px;
+    display: table;
+}
+.detail_info + .detail_info {
+    margin-left: 60px;
+}
+dl {
+    display: table-row;
+    line-height: 27px;
+}
+
+dt {
+    display: table-cell;
+    padding-right: 20px;
+    font-weight: normal;
+    color: #98989C;
+}
+
+dd {
+    display: table-cell;
+    font-size: 16px;
+}
+
+nav {
+    border-bottom: 1px solid rgba(214, 214, 220, 0.89);
+    padding: 20px 0 20px 0;
+    margin: 40px 0 20px 20px;
+}
+nav a {
+    margin-right: 50px;
+    padding: 20px 0 20px 0;
+
+}
+nav a:hover{
+    font-weight: 600;
+    border-bottom: 2px solid #000000;
+}
+.detail_content {
+    margin-left: 20px;
+}
+.detail_content div {
+    padding-bottom: 30px;
+}
+
+.detail_content div h2 {
+    padding-top: 40px;
+    border-bottom: 1px solid rgba(214, 214, 220, 0.89);
+    padding-bottom: 30px;
+}
 .movie_summary {
     width: 50%;
     line-height: 26px;
@@ -22,4 +86,21 @@
 
 .movie_crew span{
     margin-right: 10px;
+}
+
+.movie_media ul {
+    margin: -20px 0 0 -20px;
+    list-style: none;
+    padding: 0;
+}
+
+.movie_media li {
+    padding-top: 20px;
+}
+
+.movie_media li img {
+    margin: 20px 0 0 20px;
+    width: 260px;
+    height: auto;
+    border-radius: 8px;
 }
